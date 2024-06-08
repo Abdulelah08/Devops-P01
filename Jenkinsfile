@@ -32,11 +32,11 @@ pipeline {
 
         stage('Plan') {
             steps {
-                bat 'pwd;cd terraform/Devops-P01 ; terraform init -input=false'
-                bat 'pwd;cd terraform/Devops-P01 ; terraform workspace new ${environment}'
-                bat 'pwd;cd terraform/Devops-P01 ; terraform workspace select ${environment}'
-                bat "pwd;cd terraform/Devops-P01 ; terraform plan -input=false -out tfplan "
-                bat 'pwd;cd terraform/Devops-P01 ; terraform show -no-color tfplan > tfplan.txt'
+                bat 'cd terraform/Devops-P01 ; terraform init -input=false'
+                bat 'cd terraform/Devops-P01 ; terraform workspace new ${environment}'
+                bat 'cd terraform/Devops-P01 ; terraform workspace select ${environment}'
+                bat "cd terraform/Devops-P01 ; terraform plan -input=false -out tfplan "
+                bat 'cd terraform/Devops-P01 ; terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
@@ -57,7 +57,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                bat "pwd;cd terraform/Devops-P01 ; terraform apply -input=false tfplan"
+                bat "cd terraform/Devops-P01 ; terraform apply -input=false tfplan"
             }
         }
     }
