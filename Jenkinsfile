@@ -32,11 +32,11 @@ pipeline {
 
         stage('Plan') {
             steps {
-                bat 'cd C:\Users\abdul\Desktop\DevopsP01 ; terraform init -input=false'
-                bat 'cd C:\Users\abdul\Desktop\DevopsP01 ; terraform workspace new ${environment}'
-                bat 'cd C:\Users\abdul\Desktop\DevopsP01 ; terraform workspace select ${environment}'
-                bat "cd C:\Users\abdul\Desktop\DevopsP01 ; terraform plan -input=false -out tfplan "
-                bat 'cd C:\Users\abdul\Desktop\DevopsP01 ; terraform show -no-color tfplan > tfplan.txt'
+                bat 'cd C:\\Users\\abdul\\Desktop\\DevopsP01 ; terraform init -input=false'
+                bat 'cd C:\\Users\\abdul\\Desktop\\DevopsP01 ; terraform workspace new ${environment}'
+                bat 'cd C:\\Users\\abdul\\Desktop\\DevopsP01 ; terraform workspace select ${environment}'
+                bat "cd C:\\Users\\abdul\\Desktop\\DevopsP01 ; terraform plan -input=false -out tfplan "
+                bat 'cd C:\\Users\\abdul\\Desktop\\DevopsP01 ; terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
@@ -48,7 +48,7 @@ pipeline {
 
            steps {
                script {
-                    def plan = readFile 'C:\Users\abdul\Desktop\DevopsP01/tfplan.txt'
+                    def plan = readFile 'C:\\Users\\abdul\\Desktop\\DevopsP01/tfplan.txt'
                     input message: "Do you want to apply the plan?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                }
@@ -57,7 +57,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                bat "cd C:\Users\abdul\Desktop\DevopsP01 ; terraform apply -input=false tfplan"
+                bat "cd C:\\Users\\abdul\\Desktop\\DevopsP01 ; terraform apply -input=false tfplan"
             }
         }
     }
